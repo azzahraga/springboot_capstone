@@ -79,7 +79,7 @@ public class PasienService {
     //     .build(AppConstant.ResponseCode.SUCCESS, pasien.get(), HttpStatus.OK);
     // }
 
-    public ResponseEntity<Object> updatePasien(Pasien request, Long id) {
+    public ResponseEntity<Object> updatePasien(PasienRequest request, Long id) {
         try {
             log.info("Update pasien: {}", request);
             Optional<Pasien> pasien = pasienRepository.findOne(id);

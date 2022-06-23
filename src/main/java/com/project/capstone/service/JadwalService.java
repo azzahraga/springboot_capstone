@@ -107,16 +107,25 @@ public class JadwalService {
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal.get(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Object> updateJadwal(Jadwal request, Long id) {
+    public ResponseEntity<Object> updateJadwal(JadwalRequest request, Long id) {
         try {
+
+            
             log.info("Update jadwal: {}", request);
             Optional<Jadwal> jadwal = jadwalRepository.findById(id);
+
+            Dokter dkt = dokterRepository.findById(request.getDokterId())
+                .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
+
+  
+            Pasien pasien = pasienRepository.findById(request.getPasienId())
+                .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
             if (jadwal.isEmpty()) {
                 log.info("Jadwal not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
             }
-            jadwal.get().setDokter(request.getDokter());
-            jadwal.get().setPasien(request.getPasien());
+            jadwal.get().setDokter(dkt);
+            jadwal.get().setPasien(pasien);
             jadwal.get().setNourut(request.getNourut());
             jadwal.get().setJp(request.getJp());
             jadwal.get().setTanggal(request.getTanggal());

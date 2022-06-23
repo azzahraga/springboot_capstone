@@ -76,7 +76,7 @@ public class UserService {
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, null, HttpStatus.OK);
     }
     
-    public ResponseEntity<Object> updateUser(User request, Long id) {
+    public ResponseEntity<Object> updateUser(UserRequest request, Long id) {
         try {
             log.info("Update user: {}", request);
             Optional<User> user = userRepository.findOne(id);

@@ -47,7 +47,7 @@ public class DokterController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updatedokter(@PathVariable(value = "id") Long dokterId,
-                                              @RequestBody Dokter request) {
+                                              @RequestBody DokterRequest request) {
         return dokterService.updateDokter(request, dokterId);
     }
     

@@ -71,7 +71,7 @@ public class DokterService {
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, dokter.get(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Object> updateDokter(Dokter request, Long id) {
+    public ResponseEntity<Object> updateDokter(DokterRequest request, Long id) {
         try {
             log.info("Update dokter: {}", request);
             Optional<Dokter> dokter = dokterRepository.findOne(id);

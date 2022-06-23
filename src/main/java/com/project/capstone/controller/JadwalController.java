@@ -46,7 +46,7 @@ public class JadwalController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateJadwal(@PathVariable(value = "id") Long jadwalId,
-                                              @RequestBody Jadwal request) {
+                                              @RequestBody JadwalRequest request) {
         return jadwalService.updateJadwal(request, jadwalId);
     }
     
