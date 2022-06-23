@@ -22,8 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class JadwalService {
+    @Autowired
     private JadwalRepository jadwalRepository;
+    @Autowired
     private DokterRepository dokterRepository;
+    @Autowired
     private PasienRepository pasienRepository;
 
     @Autowired
