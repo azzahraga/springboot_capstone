@@ -112,7 +112,7 @@ public class JadwalService {
 
             
             log.info("Update jadwal: {}", request);
-            Optional<Jadwal> jadwal = jadwalRepository.findById(id);
+            Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
 
             Dokter dkt = dokterRepository.findById(request.getDokterId())
                 .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
