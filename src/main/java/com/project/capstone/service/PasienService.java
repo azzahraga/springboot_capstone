@@ -39,6 +39,7 @@ public class PasienService {
             .umur(request.getUmur())
             .jeniskelamin(request.getJeniskelamin())
             .telp(request.getTelp())
+            .alamat(request.getAlamat())
             .build();
         try {
             pasien = pasienRepository.save(pasien);
@@ -93,6 +94,7 @@ public class PasienService {
             pasien.get().setUmur(request.getUmur());
             pasien.get().setJeniskelamin(request.getJeniskelamin());
             pasien.get().setTelp(request.getTelp());
+            pasien.get().setAlamat(request.getAlamat());
             // user.get().setRole(request.getRole());
             pasienRepository.save(pasien.get());
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, pasien.get(), HttpStatus.OK);

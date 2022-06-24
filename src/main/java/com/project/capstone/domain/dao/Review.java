@@ -1,18 +1,21 @@
 package com.project.capstone.domain.dao;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.capstone.domain.dao.base.BaseEntityWithDeletedAt;
@@ -27,48 +30,33 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @Entity
-@Table(name = "M_JADWAL")
+@Table(name = "M_REVIEW")
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Jadwal extends BaseEntityWithDeletedAt{
-    
+public class Review extends BaseEntityWithDeletedAt{
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "no_urut", nullable = false)
-    private Integer nourut;
+    @Column(name = "catatan", nullable = false)
+    private String catatan;
 
-    @Column(name = "jenis_perawatan", nullable = false)
-    private String jp;
-
-    @Column(name = "tanggal_kunjungan", nullable = false)
-    private Date tanggal;
-
-    @ManyToOne
-    @JoinColumn (name = "user_id", referencedColumnName = "id")
-    private User userjadwal;
-
-    @ManyToOne
-    @JoinColumn (name = "dokter_id", referencedColumnName = "id")
-    private Dokter dokter;
-
-    @ManyToOne
-    @JoinColumn (name = "pasien_id", referencedColumnName = "id")
-    private Pasien pasien;
+    @Column(name = "diagnosa", nullable = false)
+    private String diagnosa;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name = "review_id", referencedColumnName = "id")
-    private Review review;
+    @OneToOne(mappedBy="review")
+    private Jadwal jadwal;
 
-    // @OneToOne(mappedBy="jadwal")
-    // private Review review;
+    // @OneToOne
+    // @JoinColumn (name = "jadwal_id", referencedColumnName = "id")
+    // private Jadwal jadwal;
 
-    // @OneToOne(fetch = FetchType.LAZY,
-    //         cascade =  CascadeType.ALL,
-    //         mappedBy = "jadwal")
-    // private Review review;
+    // @OneToOne(fetch = FetchType.LAZY, optional = false)
+    // @JoinColumn(name = "jadwal_id", nullable = false)
+    // private Jadwal jadwal;
+
 }

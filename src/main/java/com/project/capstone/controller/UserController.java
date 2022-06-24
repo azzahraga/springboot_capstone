@@ -1,6 +1,5 @@
 package com.project.capstone.controller;
 
-import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.UserRequest;
 import com.project.capstone.service.UserService;
 

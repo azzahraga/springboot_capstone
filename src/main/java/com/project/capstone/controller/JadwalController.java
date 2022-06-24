@@ -1,6 +1,5 @@
 package com.project.capstone.controller;
 
-import com.project.capstone.domain.dao.Jadwal;
 import com.project.capstone.domain.dto.JadwalRequest;
 import com.project.capstone.service.JadwalService;
 

@@ -17,16 +17,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PasienRequest implements Serializable {
+public class ReviewRequest implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
-    private Long userId;
-    private String namapasien;
-    private String nik;
-    private Integer umur;
-    private String jeniskelamin;
-    private String telp;
-    private String alamat;
-
+    private Long jadwalId;
+    private String catatan;
+    private String diagnosa;
 }

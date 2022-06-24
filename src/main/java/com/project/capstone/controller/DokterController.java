@@ -1,6 +1,5 @@
 package com.project.capstone.controller;
 
-import com.project.capstone.domain.dao.Dokter;
 import com.project.capstone.domain.dto.DokterRequest;
 import com.project.capstone.service.DokterService;
 

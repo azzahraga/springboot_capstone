@@ -56,6 +56,9 @@ public class Pasien extends BaseEntityWithDeletedAt{
     @Column(name = "telepon", nullable = false)
     private String telp;
 
+    @Column(name = "alamat", nullable = false)
+    private String alamat;
+
     @ManyToOne
     @JoinColumn (name = "user_id", referencedColumnName = "id")
     private User userpasien;

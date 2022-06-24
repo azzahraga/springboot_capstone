@@ -1,6 +1,5 @@
 package com.project.capstone.controller;
 
-import com.project.capstone.domain.dao.Pasien;
 import com.project.capstone.domain.dto.PasienRequest;
 import com.project.capstone.service.PasienService;
 
