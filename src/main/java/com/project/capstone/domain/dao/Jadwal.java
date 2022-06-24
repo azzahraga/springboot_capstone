@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.capstone.domain.dao.base.BaseEntityWithDeletedAt;
@@ -60,12 +61,13 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @JoinColumn (name = "pasien_id", referencedColumnName = "id")
     private Pasien pasien;
     
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn (name = "review_id", referencedColumnName = "id")
-    // private Review review;
-
-    @OneToOne(mappedBy="jadwal")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "review_id", referencedColumnName = "id")
+    @JsonIgnore
     private Review review;
+
+    // @OneToOne(mappedBy="jadwal")
+    // private Review review;
 
     // @OneToOne(fetch = FetchType.LAZY,
     //         cascade =  CascadeType.ALL,

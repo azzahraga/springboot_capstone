@@ -50,6 +50,9 @@ public class ReviewService {
             .build();
         
             review = reviewRepository.save(review);
+
+            jadwal.setReview(review);
+            jadwalRepository.save(jadwal);
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, review, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
