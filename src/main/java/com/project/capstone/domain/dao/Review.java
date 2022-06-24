@@ -48,12 +48,12 @@ public class Review extends BaseEntityWithDeletedAt{
     @Column(name = "diagnosa", nullable = false)
     private String diagnosa;
     
-    @OneToOne(mappedBy="review")
-    private Jadwal jadwal;
-
-    // @OneToOne
-    // @JoinColumn (name = "jadwal_id", referencedColumnName = "id")
+    // @OneToOne(mappedBy="review")
     // private Jadwal jadwal;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "jadwal_id", referencedColumnName = "id")
+    private Jadwal jadwal;
 
     // @OneToOne(fetch = FetchType.LAZY, optional = false)
     // @JoinColumn(name = "jadwal_id", nullable = false)

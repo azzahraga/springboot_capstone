@@ -60,12 +60,12 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @JoinColumn (name = "pasien_id", referencedColumnName = "id")
     private Pasien pasien;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name = "review_id", referencedColumnName = "id")
-    private Review review;
-
-    // @OneToOne(mappedBy="jadwal")
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn (name = "review_id", referencedColumnName = "id")
     // private Review review;
+
+    @OneToOne(mappedBy="jadwal")
+    private Review review;
 
     // @OneToOne(fetch = FetchType.LAZY,
     //         cascade =  CascadeType.ALL,
