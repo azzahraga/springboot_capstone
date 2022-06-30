@@ -1,14 +1,14 @@
-package com.project.capstone.response;
+// package com.project.capstone.response;
 
-import lombok.Data;
+// import lombok.Data;
 
-import java.util.List;
+// import java.util.List;
 
-import com.project.capstone.domain.dao.RoleEnum;
+// import com.project.capstone.domain.dao.RoleEnum;
 
-@Data
-public class RegistrationRequest {
-    private String username;
-    private String password;
-    private List<RoleEnum> roles;
-}
+// @Data
+// public class RegistrationRequest {
+//     private String username;
+//     private String password;
+//     private List<RoleEnum> roles;
+// }
