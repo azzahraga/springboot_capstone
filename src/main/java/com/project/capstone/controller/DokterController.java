@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-//@RequestMapping("/v1/dokter")
 @RequestMapping(value = "/dokter")
 public class DokterController {
 

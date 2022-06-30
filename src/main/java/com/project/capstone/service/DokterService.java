@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import com.project.capstone.constant.AppConstant;
 import com.project.capstone.domain.dao.Dokter;
+import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.DokterRequest;
 import com.project.capstone.repository.DokterRepository;
+import com.project.capstone.repository.UserRepository;
 import com.project.capstone.util.ResponseUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class DokterService {
+    @Autowired
     private DokterRepository dokterRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public DokterService(DokterRepository dokterRepository) {
@@ -32,16 +37,24 @@ public class DokterService {
     }
 
     public ResponseEntity<Object> save(DokterRequest request) {
+        try {
+        User user = userRepository.findById(request.getUserId())
+            .orElseThrow(()-> new Exception("Dokter Id "+ request.getUserId() + "Not Found"));
+
         log.info("Save new Dokter: {}", request);
         Dokter dokter = Dokter.builder()
+            .user(user)
             .namadokter(request.getNamadokter())
             .spesialis(request.getSpesialis())
             .srp(request.getSrp())
             .jeniskelamin(request.getJeniskelamin())
             .telp(request.getTelp())
             .build();
-        try {
+        
             dokter = dokterRepository.save(dokter);
+
+            user.setDokter(dokter);
+            userRepository.save(user);
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, dokter, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,12 +87,17 @@ public class DokterService {
     public ResponseEntity<Object> updateDokter(DokterRequest request, Long id) {
         try {
             log.info("Update dokter: {}", request);
+
+            User user = userRepository.findById(request.getUserId())
+            .orElseThrow(()-> new Exception("Dokter Id "+ request.getUserId() + "Not Found"));
+
             Optional<Dokter> dokter = dokterRepository.findOne(id);
             if (dokter.isEmpty()) {
                 log.info("dokter not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
             }
 
+            dokter.get().setUser(user);
             dokter.get().setNamadokter(request.getNamadokter());
             dokter.get().setSpesialis(request.getSpesialis());
             dokter.get().setSrp(request.getSrp());

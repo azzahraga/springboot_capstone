@@ -5,7 +5,7 @@ public class AppConstant {
     private AppConstant() {}
 
     public static final String DEFAULT_SYSTEM = "SYSTEM";
-
+    // public static final int JWT_EXPIRATION = 1800000;
     public enum ResponseCode {
 
         SUCCESS("Success!"),
@@ -22,8 +22,8 @@ public class AppConstant {
             return this.message;
         }
 
-        public static final int JWT_EXPIRATION = 1800000;
-
+        
     }
+    
 
 }

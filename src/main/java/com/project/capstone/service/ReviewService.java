@@ -51,7 +51,7 @@ public class ReviewService {
         
             review = reviewRepository.save(review);
 
-            jadwal.setReview(review);
+            jadwal.setReview(review);;
             jadwalRepository.save(jadwal);
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, review, HttpStatus.OK);
         } catch (Exception e) {

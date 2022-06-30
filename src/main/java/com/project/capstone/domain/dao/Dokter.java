@@ -9,9 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -60,8 +59,12 @@ public class Dokter extends BaseEntityWithDeletedAt{
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "dokter")
     private List<Jadwal> jadwal;
     
-    @ManyToOne
-    @JoinColumn (name = "user_id", referencedColumnName = "id")
-    private User userdokter;
+    // @ManyToOne
+    // @JoinColumn (name = "user_id", referencedColumnName = "id")
+    // private User userdokter;
+
+    @OneToOne(mappedBy="dokter")
+    private User user;
+
 
 }

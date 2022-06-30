@@ -60,6 +60,7 @@ public class Pasien extends BaseEntityWithDeletedAt{
     private String alamat;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn (name = "user_id", referencedColumnName = "id")
     private User userpasien;
 

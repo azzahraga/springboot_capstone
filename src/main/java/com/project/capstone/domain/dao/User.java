@@ -1,15 +1,9 @@
 package com.project.capstone.domain.dao;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -48,16 +42,27 @@ public class User extends BaseEntityWithDeletedAt{
     @Column(name = "password", nullable = false)
     private String password;
 
-    // @Column(name = "role", nullable = false)
-    // private String role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
-    private List<Dokter> dokter;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
+    // @JsonIgnore
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
+    // private List<Dokter> dokter;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "dokter_id", referencedColumnName = "id")
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
-    private List<Jadwal> jadwal;
+    private Dokter dokter;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
@@ -65,61 +70,3 @@ public class User extends BaseEntityWithDeletedAt{
 
 
 }
-//     public class User extends BaseEntityWithDeletedAt implements UserDetails{
-    
-//     private static final long serialVersionUID = 6251745099915144658L;
-
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id;
-
-//     @Column(name = "username", nullable = false)
-//     private String username;
-
-//     @Column(name = "password", nullable = false)
-//     private String password;
-
-//     @JsonIgnore
-//     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
-//     private List<Dokter> dokter;
-
-//     @JsonIgnore
-//     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
-//     private List<Jadwal> jadwal;
-
-//     @JsonIgnore
-//     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
-//     private List<Pasien> pasien;
-
-//     @Column(columnDefinition = "boolean default true")
-//     private boolean active = true;
-
-//     @Override
-//     public Collection<? extends GrantedAuthority> getAuthorities() {
-//         return null;
-//     }
-
-//     @Override
-//     public boolean isAccountNonExpired() {
-//         return this.active;
-//     }
-
-//     @Override
-//     public boolean isAccountNonLocked() {
-//         return this.active;
-//     }
-//     @Override
-//     public boolean isCredentialsNonExpired() {
-//         return this.active;
-//     }
-
-//     @Override
-//     public boolean isEnabled() {
-//         return this.active;
-//     }    
-
-//     public void setUsername(Object username2) {
-//     }
-//     // public void setPassword(String encode) {
-//     // }
-// }
