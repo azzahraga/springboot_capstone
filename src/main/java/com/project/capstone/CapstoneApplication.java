@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.project.capstone.config.CustomJpaRepositoryFactoryBean;
-import com.project.capstone.domain.dao.Role;
-import com.project.capstone.domain.dao.RoleEnum;
+// import com.project.capstone.domain.dao.Role;
+// import com.project.capstone.domain.dao.RoleEnum;
 // import com.project.capstone.repository.RoleRepository;
 
 import lombok.extern.log4j.Log4j2;

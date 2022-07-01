@@ -1,6 +1,6 @@
-package com.project.capstone.domain.dao;
+// package com.project.capstone.domain.dao;
 
-public enum RoleEnum {
-    ROLE_ADMIN,
-    ROLE_DOKTER
-}
+// public enum RoleEnum {
+//     ROLE_ADMIN,
+//     ROLE_DOKTER
+// }

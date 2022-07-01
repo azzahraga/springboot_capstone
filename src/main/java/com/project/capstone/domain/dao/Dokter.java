@@ -48,13 +48,7 @@ public class Dokter extends BaseEntityWithDeletedAt{
 
     @Column(name = "srp", nullable = false)
     private String srp;
-
-    @Column(name = "jenis_kelamin", nullable = false)
-    private String jeniskelamin;
-
-    @Column(name = "telepon", nullable = false)
-    private String telp;
-
+    
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "dokter")
     private List<Jadwal> jadwal;

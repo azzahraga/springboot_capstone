@@ -9,6 +9,7 @@
 // import org.springframework.stereotype.Component;
 
 // import com.project.capstone.domain.dao.User;
+// import com.project.capstone.service.implementations.UserDetailsImpl;
 
 // import io.jsonwebtoken.Claims;
 // import io.jsonwebtoken.ExpiredJwtException;
@@ -45,10 +46,30 @@
 //             .compact();
 //     }
 
+//     // public String generatedToken(Authentication authentication) {
+//     //     //final User user = (User) authentication.getPrincipal();
+//     //     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+
+//     //     Date now = new Date(System.currentTimeMillis());
+
+//     //     // Map<String, Object> claims = new HashMap<>();
+//     //     // claims.put("email", user.getUsername());
+
+//     //     return Jwts.builder()
+//     //         .setId(userPrincipal.getId().toString())
+//     //         //.setSubject(user.getUsername())
+//     //         .setSubject((userPrincipal.getUsername()))
+//     //         //.setClaims(claims)
+//     //         .setIssuedAt(now)
+//     //         .signWith(key)
+//     //         .compact();
+//     // }
+
 //     public boolean validatedToken(String token){
 
 //         try{
 //             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+//             return true;
 //         }
 //         catch(MalformedJwtException ex){
 //             log.error("Invalid Jwt Token: {}", ex.getMessage());

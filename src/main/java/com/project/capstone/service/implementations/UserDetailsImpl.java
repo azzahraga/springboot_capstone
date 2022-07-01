@@ -23,6 +23,7 @@
 
 //     private final Collection<? extends GrantedAuthority> authorities;
 
+
 //     public UserDetailsImpl(
 //             Long id, String username, String password,
 //             Collection<? extends GrantedAuthority> authorities

@@ -47,8 +47,6 @@ public class DokterService {
             .namadokter(request.getNamadokter())
             .spesialis(request.getSpesialis())
             .srp(request.getSrp())
-            .jeniskelamin(request.getJeniskelamin())
-            .telp(request.getTelp())
             .build();
         
             dokter = dokterRepository.save(dokter);
@@ -101,8 +99,6 @@ public class DokterService {
             dokter.get().setNamadokter(request.getNamadokter());
             dokter.get().setSpesialis(request.getSpesialis());
             dokter.get().setSrp(request.getSrp());
-            dokter.get().setJeniskelamin(request.getJeniskelamin());
-            dokter.get().setTelp(request.getTelp());
     
             // user.get().setRole(request.getRole());
             dokterRepository.save(dokter.get());

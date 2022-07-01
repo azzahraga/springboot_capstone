@@ -25,7 +25,4 @@ public class DokterRequest implements Serializable {
     private String namadokter;
     private String spesialis;
     private String srp;
-    private String jeniskelamin;
-    private String telp;
-
 }
