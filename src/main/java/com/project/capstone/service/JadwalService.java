@@ -72,6 +72,8 @@ public class JadwalService {
             .nourut(request.getNourut())
             .jp(request.getJp())
             .tanggal(request.getTanggal())
+            .catatan(request.getCatatan())
+            .diagnosa(request.getDiagnosa())
             .build();
         
             jadwal = jadwalRepository.save(jadwal);
@@ -129,6 +131,8 @@ public class JadwalService {
             jadwal.get().setNourut(request.getNourut());
             jadwal.get().setJp(request.getJp());
             jadwal.get().setTanggal(request.getTanggal());
+            jadwal.get().setCatatan(request.getCatatan());
+            jadwal.get().setDiagnosa(request.getDiagnosa());
             // jadwal.get().setStatus(request.getStatus());
             // user.get().setRole(request.getRole());
             jadwalRepository.save(jadwal.get());

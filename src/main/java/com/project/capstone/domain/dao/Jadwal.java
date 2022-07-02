@@ -2,7 +2,6 @@ package com.project.capstone.domain.dao;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,11 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.capstone.domain.dao.base.BaseEntityWithDeletedAt;
@@ -47,6 +45,12 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @Column(name = "jenis_perawatan", nullable = false)
     private String jp;
 
+    @Column(name = "catatan")
+    private String catatan;
+
+    @Column(name = "diagnosa")
+    private String diagnosa;
+
     @Column(name = "tanggal_kunjungan", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date tanggal;
@@ -59,10 +63,10 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @JoinColumn (name = "pasien_id", referencedColumnName = "id")
     private Pasien pasien;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name = "review_id", referencedColumnName = "id")
-    @JsonIgnore
-    private Review review;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn (name = "review_id", referencedColumnName = "id")
+    // @JsonIgnore
+    // private Review review;
 
     // @OneToOne(mappedBy="jadwal")
     // private Review review;
