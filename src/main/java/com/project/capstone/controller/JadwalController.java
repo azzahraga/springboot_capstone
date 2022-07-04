@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 //@RequestMapping("/v1/jadwal")
 @RequestMapping(value = "/jadwal")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:3000")
 public class JadwalController {
 
     @Autowired

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.project.capstone.config.CustomJpaRepositoryFactoryBean;
 // import com.project.capstone.domain.dao.Role;
@@ -30,7 +31,7 @@ public class CapstoneApplication {
    	return new WebMvcConfigurer() {
 	  @Override
 	  public void addCorsMappings(CorsRegistry registry) {
-		 registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+		 registry.addMapping("/**").allowedOrigins("http://localhost:3000");
 	  }
    };
 }
@@ -40,7 +41,7 @@ public class CapstoneApplication {
 //    	return new WebMvcConfigurerAdapter() {
 // 	  @Override
 // 	  public void addCorsMappings(CorsRegistry registry) {
-// 		 registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+// 		 registry.addMapping("/**").allowedOrigins("http://localhost:3000");
 // 	  }
 //    };
 // }
