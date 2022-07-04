@@ -28,7 +28,9 @@ public class CapstoneApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry){
-				registry.addMapping("/**").allowedOrigins("http://localhost:3000", "https://springboot-postgresql-capstone.herokuapp.com").allowCredentials(true).allowedMethods("GET", "PUT", "POST", "DELETE");
+				registry.addMapping("/**")
+				.allowedOrigins("http://localhost:3000", "https://springboot-postgresql-capstone.herokuapp.com","https://fanciful-trifle-3600ae.netlify.app/")
+				.allowCredentials(true).allowedMethods("GET", "PUT", "POST", "DELETE");
 			}
 		};
 	}
