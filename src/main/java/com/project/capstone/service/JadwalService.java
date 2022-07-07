@@ -72,6 +72,7 @@ public class JadwalService {
             .nourut(request.getNourut())
             .jp(request.getJp())
             .tanggal(request.getTanggal())
+            .controll(request.getControll())
             .catatan(request.getCatatan())
             .diagnosa(request.getDiagnosa())
             .build();
@@ -131,6 +132,7 @@ public class JadwalService {
             jadwal.get().setNourut(request.getNourut());
             jadwal.get().setJp(request.getJp());
             jadwal.get().setTanggal(request.getTanggal());
+            jadwal.get().setControll(request.getControll());
             jadwal.get().setCatatan(request.getCatatan());
             jadwal.get().setDiagnosa(request.getDiagnosa());
             // jadwal.get().setStatus(request.getStatus());

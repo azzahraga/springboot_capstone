@@ -28,6 +28,7 @@ public class JadwalRequest implements Serializable {
     private Integer nourut;
     private String jp;
     private Date tanggal;
+    private Date controll;
     private String catatan;
     private String diagnosa;
 

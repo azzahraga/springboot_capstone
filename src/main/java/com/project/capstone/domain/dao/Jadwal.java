@@ -45,6 +45,10 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @Column(name = "jenis_perawatan", nullable = false)
     private String jp;
 
+    @Column(name = "controll")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private Date controll;
+
     @Column(name = "catatan")
     private String catatan;
 
