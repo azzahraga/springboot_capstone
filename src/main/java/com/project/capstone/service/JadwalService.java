@@ -43,29 +43,15 @@ public class JadwalService {
     public ResponseEntity<Object> save(JadwalRequest request){
         try{
         // log.info("Get Dokter: {}");
-        Dokter dkt = dokterRepository.findById(request.getDokterId())
+        Dokter dkt = dokterRepository.findOne(request.getDokterId())
             .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
 
         // log.info("Get Pasien: {}");
-        Pasien pasien = pasienRepository.findById(request.getPasienId())
+        Pasien pasien = pasienRepository.findOne(request.getPasienId())
             .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
 
         log.info("Save new jadwal: {}",request);
-        // Jadwal jadwal = new Jadwal();
-
-        // jadwal.setDokter(dkt);
-        // jadwal.setPasien(pasien);
-        // jadwal.setNourut(request.getNourut());
-        // jadwal.setJp(request.getJp());
-        // jadwal.setTanggal(request.getTanggal());
-        // jadwalRepository.save(jadwal);
-        // return jadwal;
-        // // return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
-        // } catch (Exception e){
-        //     log.error("Post jadwal error");
-        //     throw new RuntimeException(e.getMessage(),e);
-        //     // return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
-        // }
+        
         Jadwal jadwal = Jadwal.builder()
             .dokter(dkt)
             .pasien(pasien)
@@ -117,11 +103,11 @@ public class JadwalService {
             log.info("Update jadwal: {}", request);
             Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
 
-            Dokter dkt = dokterRepository.findById(request.getDokterId())
+            Dokter dkt = dokterRepository.findOne(request.getDokterId())
                 .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
 
   
-            Pasien pasien = pasienRepository.findById(request.getPasienId())
+            Pasien pasien = pasienRepository.findOne(request.getPasienId())
                 .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
             if (jadwal.isEmpty()) {
                 log.info("Jadwal not found");
@@ -145,14 +131,5 @@ public class JadwalService {
         }
     }
 
-    // public ResponseEntity<Object> updateJp(JadwalRequest request, Long jadwalId) {
-    //     log.info("Update jenis perawatan: {}", request);
-    //     Optional<Jadwal> jadwal = jadwalRepository.findById(jadwalId);
-    //     if (jadwal.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
-
-    //     jadwal.get().setJp(request.getJp());
-    //     jadwalRepository.save(jadwal.get());
-    //     return ResponseEntity.ok().body(jadwal.get());
-    // }
    
 }

@@ -46,7 +46,7 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     private String jp;
 
     @Column(name = "controll")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date controll;
 
     @Column(name = "catatan")
@@ -56,7 +56,7 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     private String diagnosa;
 
     @Column(name = "tanggal_kunjungan", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date tanggal;
 
     @ManyToOne

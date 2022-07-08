@@ -40,7 +40,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(req.getPassword()));
         Set<Role> roles = new HashSet<>();
             if(req.getRoles() == null) {
-                Role role = roleRepository.findByName(RoleEnum.ROLE_ADMIN)
+                Role role = roleRepository.findByName(RoleEnum.ROLE_DOKTER)
                     .orElseThrow(() -> new RuntimeException("ROLE NOT FOUND"));
 
                 roles.add(role);
