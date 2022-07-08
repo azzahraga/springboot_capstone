@@ -1,10 +1,10 @@
-// package com.project.capstone.response;
+package com.project.capstone.response;
 
-// import lombok.Data;
+import lombok.Data;
 
-// @Data
-// public class UsernamePassword {
+@Data
+public class UsernamePassword {
 
-//     private String username;
-//     private String password;
-// }
+    private String username;
+    private String password;
+}
