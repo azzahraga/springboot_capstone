@@ -23,10 +23,10 @@ public class PasienRequest implements Serializable {
 
     private Long userId;
     private String namapasien;
-    private String nik;
+    private Long nik;
     private Integer umur;
     private String jeniskelamin;
-    private String telp;
+    private Long telp;
     private String alamat;
 
 }

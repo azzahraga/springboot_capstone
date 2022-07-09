@@ -47,7 +47,7 @@ public class Dokter extends BaseEntityWithDeletedAt{
     private String spesialis;
 
     @Column(name = "srp", nullable = false)
-    private String srp;
+    private Long srp;
     
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "dokter")

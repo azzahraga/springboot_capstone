@@ -45,7 +45,7 @@ public class Pasien extends BaseEntityWithDeletedAt{
     private String namapasien;
 
     @Column(name = "nik", nullable = false)
-    private String nik;
+    private Long nik;
 
     @Column(name = "umur", nullable = false)
     private Integer umur;
@@ -54,7 +54,7 @@ public class Pasien extends BaseEntityWithDeletedAt{
     private String jeniskelamin;
 
     @Column(name = "telepon", nullable = false)
-    private String telp;
+    private Long telp;
 
     @Column(name = "alamat", nullable = false)
     private String alamat;
