@@ -38,7 +38,7 @@ public class DokterService {
 
     public ResponseEntity<Object> save(DokterRequest request) {
         try {
-        User user = userRepository.findById(request.getUserId())
+        User user = userRepository.findOne(request.getUserId())
             .orElseThrow(()-> new Exception("Dokter Id "+ request.getUserId() + "Not Found"));
 
         log.info("Save new Dokter: {}", request);
@@ -86,7 +86,7 @@ public class DokterService {
         try {
             log.info("Update dokter: {}", request);
 
-            User user = userRepository.findById(request.getUserId())
+            User user = userRepository.findOne(request.getUserId())
             .orElseThrow(()-> new Exception("Dokter Id "+ request.getUserId() + "Not Found"));
 
             Optional<Dokter> dokter = dokterRepository.findOne(id);

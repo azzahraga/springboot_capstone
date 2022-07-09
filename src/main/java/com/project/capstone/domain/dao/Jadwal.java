@@ -1,5 +1,6 @@
 package com.project.capstone.domain.dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -47,7 +48,7 @@ public class Jadwal extends BaseEntityWithDeletedAt{
 
     @Column(name = "controll")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date controll;
+    private LocalDate controll;
 
     @Column(name = "catatan")
     private String catatan;
@@ -57,7 +58,7 @@ public class Jadwal extends BaseEntityWithDeletedAt{
 
     @Column(name = "tanggal_kunjungan", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date tanggal;
+    private LocalDate tanggal;
 
     @ManyToOne
     @JoinColumn (name = "dokter_id", referencedColumnName = "id")

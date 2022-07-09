@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.project.capstone.constant.AppConstant;
-
+import com.project.capstone.domain.dto.UserRequest;
 import com.project.capstone.response.RegistrationRequest;
 import com.project.capstone.response.TokenResponse;
 import com.project.capstone.response.UsernamePassword;
@@ -23,7 +23,7 @@ public class AuthenticationController {
     AuthService authenticationService;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> authenticateUser(@RequestBody UsernamePassword loginRequest) {
+    public ResponseEntity<TokenResponse> authenticateUser(@RequestBody UserRequest loginRequest) {
         log.info("Incoming password login request.");
         TokenResponse tokenResponse = authenticationService.generatedToken(loginRequest);
         log.info("Successfully authenticated.");
@@ -32,7 +32,7 @@ public class AuthenticationController {
 
   
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody RegistrationRequest request) {
+    public ResponseEntity<?> registerUser(@RequestBody UserRequest request) {
         try {
             authenticationService.register(request);
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, request, HttpStatus.OK);

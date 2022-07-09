@@ -1,10 +1,12 @@
 package com.project.capstone.domain.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.project.capstone.domain.dao.RoleEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +22,9 @@ import lombok.NoArgsConstructor;
 public class UserRequest implements Serializable {
     
     private static final long serialVersionUID = 1L;
-
+    private Long id;
     private String username;
     private String password;
+    private List<RoleEnum> roles;
 
 }

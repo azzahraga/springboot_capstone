@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.project.capstone.domain.dao.Role;
 import com.project.capstone.domain.dao.RoleEnum;
 import com.project.capstone.domain.dao.User;
+import com.project.capstone.domain.dto.UserRequest;
 import com.project.capstone.repository.RoleRepository;
 import com.project.capstone.repository.UserRepository;
 import com.project.capstone.response.RegistrationRequest;
@@ -34,8 +35,9 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     
-    public User register(RegistrationRequest req) {
+    public User register(UserRequest req) {
         User user = new User();
+        user.setId(req.getId());
         user.setUsername(req.getUsername());
         user.setPassword(passwordEncoder.encode(req.getPassword()));
         Set<Role> roles = new HashSet<>();
@@ -55,7 +57,7 @@ public class AuthService {
         return userRepository.save(user);
     }
 
-    public TokenResponse generatedToken(UsernamePassword req) {
+    public TokenResponse generatedToken(UserRequest req) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

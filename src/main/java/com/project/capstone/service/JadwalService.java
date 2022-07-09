@@ -118,11 +118,27 @@ public class JadwalService {
             jadwal.get().setNourut(request.getNourut());
             jadwal.get().setJp(request.getJp());
             jadwal.get().setTanggal(request.getTanggal());
+            jadwalRepository.save(jadwal.get());
+            return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Get an error by update jadwal, Error : {}",e.getMessage());
+            return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR,null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Object> updateJadwalByDokter(JadwalRequest request, Long id) {
+        try {
+
+            log.info("Update jadwal: {}", request);
+            Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
+            if (jadwal.isEmpty()) {
+                log.info("Jadwal not found");
+                return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
+            }
+            
             jadwal.get().setControll(request.getControll());
             jadwal.get().setCatatan(request.getCatatan());
             jadwal.get().setDiagnosa(request.getDiagnosa());
-            // jadwal.get().setStatus(request.getStatus());
-            // user.get().setRole(request.getRole());
             jadwalRepository.save(jadwal.get());
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal.get(), HttpStatus.OK);
         } catch (Exception e) {

@@ -29,6 +29,7 @@ public class JwtProvider {
         UserDetailsImpl user = (UserDetailsImpl) auth.getPrincipal();
 
         return Jwts.builder()
+            .setId(user.getId().toString())
             .setSubject(user.getUsername())
             .signWith(key)
             .compact();

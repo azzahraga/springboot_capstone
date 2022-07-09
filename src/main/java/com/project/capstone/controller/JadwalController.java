@@ -5,6 +5,7 @@ import com.project.capstone.service.JadwalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,9 +45,17 @@ public class JadwalController {
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> updateJadwal(@PathVariable(value = "id") Long jadwalId,
                                               @RequestBody JadwalRequest request) {
         return jadwalService.updateJadwal(request, jadwalId);
+    }
+
+    @PutMapping(value = "/editbydokter/{id}")
+    @PreAuthorize("hasRole('DOKTER')")
+    public ResponseEntity<Object> updateJadwalByDokter(@PathVariable(value = "id") Long jadwalId,
+                                              @RequestBody JadwalRequest request) {
+        return jadwalService.updateJadwalByDokter(request, jadwalId);
     }
     
 }
