@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.project.capstone.constant.AppConstant;
+import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.UserRequest;
 import com.project.capstone.response.RegistrationRequest;
 import com.project.capstone.response.TokenResponse;
@@ -34,8 +35,8 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRequest request) {
         try {
-            authenticationService.register(request);
-            return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, request, HttpStatus.OK);
+            User user = authenticationService.register(request);
+            return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, user, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);        
         }
