@@ -1,6 +1,7 @@
 package com.project.capstone.service.implementations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +35,7 @@ public class AuthService {
     private final JwtProvider jwtProvider; 
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private Boolean check;
     
     public User register(UserRequest req) {
         User user = new User();
@@ -59,6 +61,7 @@ public class AuthService {
 
     public TokenResponse generatedToken(UserRequest req) {
         try {
+            
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                     req.getUsername(),
@@ -66,6 +69,20 @@ public class AuthService {
                 )
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+            check=false;
+            User user = userRepository.findUsername(req.getUsername());
+
+            user.getRoles().forEach(role ->{
+                if(role.getName().equals((req.getRole()))){
+                    check=true;
+                }
+            });
+            
+            if(check==false){
+                throw new Exception("User with role "+req.getRole()+" is not found");
+            }
+
             String jwt = jwtProvider.generateToken(authentication);
             TokenResponse tokenResponse = new TokenResponse();
             tokenResponse.setToken(jwt);

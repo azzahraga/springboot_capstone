@@ -26,5 +26,6 @@ public class UserRequest implements Serializable {
     private String username;
     private String password;
     private List<RoleEnum> roles;
+    private RoleEnum role;
 
 }
