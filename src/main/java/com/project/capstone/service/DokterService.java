@@ -1,5 +1,6 @@
 package com.project.capstone.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.project.capstone.constant.AppConstant;
@@ -109,19 +110,22 @@ public class DokterService {
         }
     }
 
+    public List<Dokter> getDokterByUser(String userId) {
+        try {
+            Long id = Long.parseLong(userId);
+            log.info("Get user {}", id);
+            Optional<User> user = userRepository.findOne(id);
+            if (user.isEmpty()) {
+                log.info("user not found");
+            }
+            List<Dokter> dokter = dokterRepository.findDokterByUser(id);
 
-    // public ResponseEntity<Object> updatedokter(DokterRequest request, Long dokterId) {
-    //     log.info("Update nama: {}", request);
-    //     Optional<Dokter> dokter = dokterRepository.findById(dokterId);
-    //     if (dokter.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
-
-    //     dokter.get().setNamadokter(request.getNamadokter());
-    //     dokter.get().setSpesialis(request.getSpesialis());
-    //     // dokter.get().setSrp(request.getSrp());
-    //     // dokter.get().setJeniskelamin(request.getJeniskelamin());
-    //     // dokter.get().setTelp(request.getTelp());
-    //     // dokterRepository.save(dokter.get());
-    //     return ResponseEntity.ok().body(dokter.get());
-    // }
+            if(dokter.isEmpty()) throw new Exception("DOKTER NOT FOUND");
+            return dokter;
+        } catch (Exception e) {
+            log.error("Get course taken by user error");
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
    
 }
