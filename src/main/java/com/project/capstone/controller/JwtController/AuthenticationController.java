@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.capstone.constant.AppConstant;
 import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.UserRequest;
-import com.project.capstone.response.RegistrationRequest;
 import com.project.capstone.response.TokenResponse;
-import com.project.capstone.response.UsernamePassword;
 import com.project.capstone.service.implementations.AuthService;
 import com.project.capstone.util.ResponseUtil;
 

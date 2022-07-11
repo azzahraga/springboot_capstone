@@ -7,7 +7,5 @@ import com.project.capstone.repository.softdeletes.SoftDeletesRepository;
 
 @Repository
 public interface DokterRepository extends SoftDeletesRepository<Dokter, Long> {
-
-    // Optional<Dokter> findOne(Long id);
     
 }

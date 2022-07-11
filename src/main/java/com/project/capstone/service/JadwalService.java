@@ -1,21 +1,25 @@
 package com.project.capstone.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.project.capstone.constant.AppConstant;
 import com.project.capstone.domain.dao.Dokter;
 import com.project.capstone.domain.dao.Jadwal;
 import com.project.capstone.domain.dao.Pasien;
+import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.JadwalRequest;
 import com.project.capstone.repository.DokterRepository;
 import com.project.capstone.repository.JadwalRepository;
 import com.project.capstone.repository.PasienRepository;
+import com.project.capstone.repository.UserRepository;
 import com.project.capstone.util.ResponseUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +32,9 @@ public class JadwalService {
     private DokterRepository dokterRepository;
     @Autowired
     private PasienRepository pasienRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     @Autowired
     public JadwalService(JadwalRepository jadwalRepository) {
@@ -147,5 +154,22 @@ public class JadwalService {
         }
     }
 
+    public List<Jadwal> getJadwalByUser(String userId) {
+        try {
+            Long id = Long.parseLong(userId);
+            log.info("Get user {}", id);
+            Optional<User> user = userRepository.findOne(id);
+            if (user.isEmpty()) {
+                log.info("user not found");
+            }
+            List<Jadwal> jadwal = jadwalRepository.findJadwalByUser(id);
+
+            if(jadwal.isEmpty()) throw new Exception("JADWAL BY DOKTER IS EMPTY");
+            return jadwal;
+        } catch (Exception e) {
+            log.error("Get course taken by user error");
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
    
 }

@@ -33,6 +33,8 @@ public class JwtProvider {
             .setSubject(user.getUsername())
             .signWith(key)
             .compact();
+
+        
     }
     public boolean validatedToken(String token){
 
@@ -54,5 +56,9 @@ public class JwtProvider {
 
     public String getUsername(String token){
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String getId(String token){
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getId();
     }
 }
