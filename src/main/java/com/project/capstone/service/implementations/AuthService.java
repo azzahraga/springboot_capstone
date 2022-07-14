@@ -18,9 +18,7 @@ import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.UserRequest;
 import com.project.capstone.repository.RoleRepository;
 import com.project.capstone.repository.UserRepository;
-import com.project.capstone.response.RegistrationRequest;
 import com.project.capstone.response.TokenResponse;
-import com.project.capstone.response.UsernamePassword;
 import com.project.capstone.security.jwt.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -38,14 +36,22 @@ public class AuthService {
     private Boolean check;
     
     public User register(UserRequest req) {
-        User user = new User();
-        user.setId(req.getId());
-        user.setUsername(req.getUsername());
-        user.setPassword(passwordEncoder.encode(req.getPassword()));
-        Set<Role> roles = new HashSet<>();
-            if(req.getRoles() == null) {
-                Role role = roleRepository.findByName(RoleEnum.ROLE_DOKTER)
-                    .orElseThrow(() -> new RuntimeException("ROLE NOT FOUND"));
+
+        try {
+
+            log.info("Search username in database");
+            if (userRepository.findUsername(req.getUsername()) != null) {
+                throw new Exception("USER WITH USERNAME " + req.getUsername() + " IS ALREADY EXIST");
+            }
+            // if(search.getDeletedAt()!=null){
+            User user = new User();
+            user.setId(req.getId());
+            user.setUsername(req.getUsername());
+            user.setPassword(passwordEncoder.encode(req.getPassword()));
+            Set<Role> roles = new HashSet<>();
+                if(req.getRoles() == null) {
+                    Role role = roleRepository.findByName(RoleEnum.ROLE_DOKTER)
+                        .orElseThrow(() -> new RuntimeException("ROLE NOT FOUND"));
 
                 roles.add(role);
             }else {
@@ -56,12 +62,23 @@ public class AuthService {
                 });
             }
             user.setRoles(roles);
-        return userRepository.save(user);
+            return userRepository.save(user);
+            // }
+        }catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     public TokenResponse generatedToken(UserRequest req) {
         try {
-            
+            check=false;
+            User user = userRepository.findUsername(req.getUsername());
+
+            // if(user.getDeletedAt() != null){
+            //     throw new Exception("User with role "+req.getUsername()+" is not found");
+            // }else{
+
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                     req.getUsername(),
@@ -70,15 +87,13 @@ public class AuthService {
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
             
-            check=false;
-            User user = userRepository.findUsername(req.getUsername());
-
             user.getRoles().forEach(role ->{
                 if(role.getName().equals((req.getRole()))){
                     check=true;
                 }
             });
             
+
             if(check==false){
                 throw new Exception("User with role "+req.getRole()+" is not found");
             }
@@ -87,6 +102,7 @@ public class AuthService {
             TokenResponse tokenResponse = new TokenResponse();
             tokenResponse.setToken(jwt);
             return tokenResponse;
+            // }
         } catch(BadCredentialsException e) {
             log.error("Bad Credential", e);
             throw new RuntimeException(e.getMessage(), e);

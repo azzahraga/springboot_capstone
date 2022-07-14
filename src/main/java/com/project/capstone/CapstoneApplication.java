@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.project.capstone.config.CustomJpaRepositoryFactoryBean;
 import com.project.capstone.domain.dao.Role;
 import com.project.capstone.domain.dao.RoleEnum;
 import com.project.capstone.repository.RoleRepository;
@@ -18,7 +17,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @SpringBootApplication
-@EnableJpaRepositories(repositoryFactoryBeanClass = CustomJpaRepositoryFactoryBean.class)
+// @EnableJpaRepositories(repositoryFactoryBeanClass = CustomJpaRepositoryFactoryBean.class)
 public class CapstoneApplication {
 
 	public static void main(String[] args) {

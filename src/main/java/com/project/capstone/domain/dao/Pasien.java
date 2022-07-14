@@ -14,12 +14,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.project.capstone.domain.dao.base.BaseEntityWithDeletedAt;
+import com.project.capstone.domain.dao.base.BaseEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -33,7 +37,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Pasien extends BaseEntityWithDeletedAt{
+@SQLDelete(sql = "UPDATE M_PASIEN SET deleted = true WHERE id=?")
+@Where(clause = "deleted = false")
+public class Pasien extends BaseEntity{
     
     private static final long serialVersionUID = 1L;
 
@@ -68,5 +74,7 @@ public class Pasien extends BaseEntityWithDeletedAt{
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pasien")
     private List<Jadwal> jadwal;
 
-    
+    @JsonIgnore
+    @Builder.Default
+    private Boolean deleted = Boolean.FALSE;
 }

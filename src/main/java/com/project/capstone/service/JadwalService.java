@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,11 +49,11 @@ public class JadwalService {
     public ResponseEntity<Object> save(JadwalRequest request){
         try{
         // log.info("Get Dokter: {}");
-        Dokter dkt = dokterRepository.findOne(request.getDokterId())
+        Dokter dkt = dokterRepository.findById(request.getDokterId())
             .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
 
         // log.info("Get Pasien: {}");
-        Pasien pasien = pasienRepository.findOne(request.getPasienId())
+        Pasien pasien = pasienRepository.findById(request.getPasienId())
             .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
 
         log.info("Save new jadwal: {}",request);
@@ -87,7 +86,7 @@ public class JadwalService {
     public ResponseEntity<Object> deleteJadwal(Long jadwalId) {
         log.info("Find jadwal by jadwal id for delete: {}", jadwalId);
         try {
-            jadwalRepository.delete(jadwalId);
+            jadwalRepository.deleteById(jadwalId);
         } catch (EmptyResultDataAccessException e) {
             log.error("Data not found. Error: {}", e.getMessage());
             return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
@@ -97,7 +96,7 @@ public class JadwalService {
 
     public ResponseEntity<Object> getJadwalById(Long id) {
         log.info("Find jadwal detail by jadwal id: {}", id);
-        Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
+        Optional<Jadwal> jadwal = jadwalRepository.findById(id);
         if(jadwal.isEmpty()) return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
 
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal.get(), HttpStatus.OK);
@@ -108,13 +107,13 @@ public class JadwalService {
 
             
             log.info("Update jadwal: {}", request);
-            Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
+            Optional<Jadwal> jadwal = jadwalRepository.findById(id);
 
-            Dokter dkt = dokterRepository.findOne(request.getDokterId())
+            Dokter dkt = dokterRepository.findById(request.getDokterId())
                 .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
 
   
-            Pasien pasien = pasienRepository.findOne(request.getPasienId())
+            Pasien pasien = pasienRepository.findById(request.getPasienId())
                 .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
             if (jadwal.isEmpty()) {
                 log.info("Jadwal not found");
@@ -137,7 +136,7 @@ public class JadwalService {
         try {
 
             log.info("Update jadwal: {}", request);
-            Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
+            Optional<Jadwal> jadwal = jadwalRepository.findById(id);
             if (jadwal.isEmpty()) {
                 log.info("Jadwal not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
@@ -158,7 +157,7 @@ public class JadwalService {
         try {
             Long id = Long.parseLong(userId);
             log.info("Get user {}", id);
-            Optional<User> user = userRepository.findOne(id);
+            Optional<User> user = userRepository.findById(id);
             if (user.isEmpty()) {
                 log.info("user not found");
             }
