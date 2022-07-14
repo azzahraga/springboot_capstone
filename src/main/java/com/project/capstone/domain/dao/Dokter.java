@@ -58,10 +58,6 @@ public class Dokter extends BaseEntity{
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "dokter")
     private List<Jadwal> jadwal;
-    
-    // @ManyToOne
-    // @JoinColumn (name = "user_id", referencedColumnName = "id")
-    // private User userdokter;
 
     @OneToOne(mappedBy="dokter")
     private User user;

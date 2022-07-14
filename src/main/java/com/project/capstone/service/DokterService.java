@@ -41,7 +41,7 @@ public class DokterService {
         try {
             log.info("Search srp in database");
             if (dokterRepository.findDokterBySrp(request.getSrp()) != null) {
-                throw new Exception("PASIEN IS ALREADY EXIST");
+                throw new Exception("Dokter IS ALREADY EXIST");
             }
 
         User user = userRepository.findById(request.getUserId())

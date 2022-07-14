@@ -80,10 +80,6 @@ public class PasienService {
     }
     public ResponseEntity<Object> updatePasien(PasienRequest request, Long id) {
         try {
-            log.info("Search username in database");
-            if (pasienRepository.findPasienByNik(request.getNik()) != null || pasienRepository.findPasienBytelp(request.getTelp()) != null) {
-                throw new Exception("PASIEN IS ALREADY EXIST");
-            }
             log.info("Update pasien: {}", request);
             Optional<Pasien> pasien = pasienRepository.findById(id);
             if (pasien.isEmpty()) {
