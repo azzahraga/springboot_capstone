@@ -59,7 +59,7 @@ public class Dokter extends BaseEntity{
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "dokter")
     private List<Jadwal> jadwal;
 
-    @OneToOne(mappedBy="dokter")
+    @OneToOne(mappedBy="dokter",cascade = CascadeType.ALL)
     private User user;
 
     @JsonIgnore
