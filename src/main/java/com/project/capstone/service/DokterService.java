@@ -69,10 +69,10 @@ public class DokterService {
         return ResponseEntity.ok().body(dokterRepository.findById(dokterId));
     }
 
-    public ResponseEntity<Object> deleteDokter(Long id) {
-        log.info("Find dokter by dokter id for delete: {}", id);
+    public ResponseEntity<Object> deleteDokter(Long Id) {
+        log.info("Find dokter by dokter id for delete: {}", Id);
         try {
-            dokterRepository.deleteById(id);
+            dokterRepository.deleteById(Id);
         } catch (EmptyResultDataAccessException e) {
             log.error("Data not found. Error: {}", e.getMessage());
             return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
