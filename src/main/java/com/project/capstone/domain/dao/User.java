@@ -19,9 +19,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-// import org.springframework.security.core.GrantedAuthority;
-// import org.springframework.security.core.userdetails.UserDetails;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder

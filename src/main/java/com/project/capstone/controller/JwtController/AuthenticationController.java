@@ -39,4 +39,14 @@ public class AuthenticationController {
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);        
         }
     }
+
+    @PutMapping("/updateuser")
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest request) {
+        try {
+            User user = authenticationService.updateUser(request);
+            return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, user, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);        
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package com.project.capstone.service.implementations;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -107,6 +106,34 @@ public class AuthService {
             log.error("Bad Credential", e);
             throw new RuntimeException(e.getMessage(), e);
         } catch(Exception e) {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    public User updateUser(UserRequest req) {
+
+        try {
+
+            log.info("Search username in database");
+            if (userRepository.findUsername(req.getNewUsername()) != null) {
+                throw new Exception("USER WITH USERNAME " + req.getNewUsername() + " IS ALREADY EXIST");
+            }
+
+            if(req.getUsername().equals(req.getNewPassword())){
+                throw new Exception("USER WITH USERNAME " + req.getNewUsername() + " IS ALREADY EXIST");
+            }
+
+            log.info("Get user");
+            User user = userRepository.findByUsername(req.getUsername())
+                .orElseThrow(() -> new Exception("USER NOT FOUND"));
+
+            user.setUsername(req.getNewUsername());;
+            user.setPassword(passwordEncoder.encode(req.getNewPassword()));
+           
+            return userRepository.save(user);
+       
+        }catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
