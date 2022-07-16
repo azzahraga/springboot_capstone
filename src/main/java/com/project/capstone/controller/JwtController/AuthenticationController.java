@@ -40,10 +40,10 @@ public class AuthenticationController {
         }
     }
 
-    @PutMapping("/updateuser")
-    public ResponseEntity<?> updateUser(@RequestBody UserRequest request) {
+    @PutMapping("/updateuser/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable(value = "id") Long userId,@RequestBody UserRequest request) {
         try {
-            User user = authenticationService.updateUser(request);
+            User user = authenticationService.updateUser(request, userId);
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, user, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);        

@@ -1,6 +1,7 @@
 package com.project.capstone.service.implementations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -111,23 +112,20 @@ public class AuthService {
         }
     }
 
-    public User updateUser(UserRequest req) {
+    public User updateUser(UserRequest req,Long id) {
 
         try {
-
-            log.info("Search username in database");
-            if (userRepository.findUsername(req.getNewUsername()) != null) {
-                throw new Exception("USER WITH USERNAME " + req.getNewUsername() + " IS ALREADY EXIST");
-            }
-
-            if(req.getUsername().equals(req.getNewPassword())){
-                throw new Exception("USER WITH USERNAME " + req.getNewUsername() + " IS ALREADY EXIST");
-            }
-
             log.info("Get user");
-            User user = userRepository.findByUsername(req.getUsername())
+            User user = userRepository.findById(id)
                 .orElseThrow(() -> new Exception("USER NOT FOUND"));
-
+            
+                if(!user.getUsername().equals(req.getNewUsername())){
+                    Optional<User> newUser = userRepository.findByUsername(req.getNewUsername());
+                    log.info("{}",req.getNewUsername());
+                    if(!newUser.isEmpty())
+                    throw new Exception("USER WITH USERNAME " + req.getNewUsername() + " IS ALREADY EXIST");
+                }
+                
             user.setUsername(req.getNewUsername());;
             user.setPassword(passwordEncoder.encode(req.getNewPassword()));
            

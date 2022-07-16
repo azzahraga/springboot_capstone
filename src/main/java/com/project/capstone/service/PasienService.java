@@ -28,8 +28,8 @@ public class PasienService {
 
     public ResponseEntity<Object> getAll() {
         log.info("Get all pasien");
-        //return ResponseUtil.build("Success", pasienRepository.findAll(), HttpStatus.OK);
-        return ResponseEntity.ok().body(pasienRepository.findAll());
+        return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS,pasienRepository.findAll(), HttpStatus.OK);
+        // return ResponseEntity.ok().body(pasienRepository.findAll());
     }
 
     public ResponseEntity<Object> save(PasienRequest request) {

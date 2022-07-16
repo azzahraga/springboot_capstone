@@ -2,7 +2,6 @@ package com.project.capstone.domain.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

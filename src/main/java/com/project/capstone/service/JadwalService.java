@@ -42,8 +42,7 @@ public class JadwalService {
 
     public ResponseEntity<Object> getAll() {
         log.info("Get all jadwal");
-        //return ResponseUtil.build("Success", jadwalRepository.findAll(), HttpStatus.OK);
-        return ResponseEntity.ok().body(jadwalRepository.findAll());
+        return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS,jadwalRepository.findAll(), HttpStatus.OK);
     }
 
     public ResponseEntity<Object> save(JadwalRequest request){

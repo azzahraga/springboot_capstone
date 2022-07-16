@@ -75,6 +75,12 @@
 			<version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeasy</groupId>
+			<artifactId>easy-random-core</artifactId>
+			<version>5.0.0</version>
+			<scope>test</scope>
+		</dependency>
 		
 	</dependencies>
 
@@ -101,6 +107,39 @@
 					<source>11</source>
 					<target>11</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<configuration>
+					<excludes>
+						<exclude>**/CapstoneApplication.class</exclude>
+						<exclude>**/config/*.class</exclude>
+						<exclude>**/constant/*.class</exclude>
+						<exclude>**/controller/**/*.class</exclude>
+						<exclude>**/domain/**/*.class</exclude>
+						<exclude>**/repository/*.class</exclude>
+						<exclude>**/constant/*.class</exclude>
+						<exclude>**/security/**/*.class</exclude>
+						<exclude>**/service/implementations/*.class</exclude>
+						<exclude>**/util/*.class</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 		</plugins>

@@ -77,7 +77,7 @@ public class UserService {
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
             }
 
-            user.get().setUsername(request.getUsername());;
+            user.get().setUsername(request.getUsername());
             user.get().setPassword(request.getPassword());
             // user.get().setRole(request.getRole());
             userRepository.save(user.get());

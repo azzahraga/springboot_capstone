@@ -33,8 +33,8 @@ public class DokterService {
 
     public ResponseEntity<Object> getAll() {
         log.info("Get all dokter");
-        //return ResponseUtil.build("Success", customerRepository.findAll(), HttpStatus.OK);
-        return ResponseEntity.ok().body(dokterRepository.findAll());
+        return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, dokterRepository.findAll(), HttpStatus.OK);
+        // return ResponseEntity.ok().body(dokterRepository.findAll());
     }
 
     public ResponseEntity<Object> save(DokterRequest request) {
