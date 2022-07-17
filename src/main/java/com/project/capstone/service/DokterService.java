@@ -65,10 +65,6 @@ public class DokterService {
         }
     }
 
-    public ResponseEntity<Object> getDokter(Long dokterId) {
-        return ResponseEntity.ok().body(dokterRepository.findById(dokterId));
-    }
-
     public ResponseEntity<Object> deleteDokter(Long Id) {
         log.info("Find dokter by dokter id for delete: {}", Id);
         try {

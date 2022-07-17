@@ -45,10 +45,6 @@ public class UserService {
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, userRepository.findAll(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Object> getUser(Long userId) {
-        return ResponseEntity.ok().body(userRepository.findById(userId));
-    }
-
     public ResponseEntity<Object> getUserDetail(Long id) {
         log.info("Find user detail by user id: {}",id);
         Optional<User> user = userRepository.findById(id);

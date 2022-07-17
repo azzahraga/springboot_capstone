@@ -65,11 +65,6 @@ public class Pasien extends BaseEntity{
     @Column(name = "alamat", nullable = false)
     private String alamat;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn (name = "user_id", referencedColumnName = "id")
-    private User userpasien;
-
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pasien")
     private List<Jadwal> jadwal;

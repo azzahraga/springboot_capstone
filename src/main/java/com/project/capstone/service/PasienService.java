@@ -56,10 +56,6 @@ public class PasienService {
         }
     }
 
-    public ResponseEntity<Object> getPasien(Long pasienId) {
-        return ResponseEntity.ok().body(pasienRepository.findById(pasienId));
-    }
-
     public ResponseEntity<Object> getPasienById(Long id) {
         log.info("Find pasien detail by pasien id: {}",id);
         Optional<Pasien> pasien = pasienRepository.findById(id);

@@ -122,6 +122,7 @@
 						<exclude>**/repository/*.class</exclude>
 						<exclude>**/constant/*.class</exclude>
 						<exclude>**/security/**/*.class</exclude>
+						<exclude>**/response/**/*.class</exclude>
 						<exclude>**/service/implementations/*.class</exclude>
 						<exclude>**/util/*.class</exclude>
 					</excludes>

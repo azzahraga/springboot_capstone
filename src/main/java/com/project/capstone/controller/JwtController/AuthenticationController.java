@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.project.capstone.constant.AppConstant;
 import com.project.capstone.domain.dao.User;
@@ -31,6 +32,7 @@ public class AuthenticationController {
 
   
     @PostMapping("/register")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> registerUser(@RequestBody UserRequest request) {
         try {
             User user = authenticationService.register(request);

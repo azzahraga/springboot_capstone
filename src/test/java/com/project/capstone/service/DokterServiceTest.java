@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,8 +27,6 @@ import com.project.capstone.domain.common.ApiResponse;
 import com.project.capstone.domain.dao.Dokter;
 import com.project.capstone.domain.dao.User;
 import com.project.capstone.domain.dto.DokterRequest;
-// import com.project.capstone.domain.dao.User;
-// import com.project.capstone.domain.dto.DokterRequest;
 import com.project.capstone.repository.DokterRepository;
 import com.project.capstone.repository.UserRepository;
 
@@ -102,38 +101,101 @@ public class DokterServiceTest {
 
        }
 
-    //    @Test
-    //    void testDeleteCategory() {
-    //        when(dokterRepository.findById(anyLong()))
-    //            .thenReturn(Optional.of(Dokter.builder()
-    //                .id(1L)
-    //                .namadokter("lala")
-    //                .spesialis("bedah jantung")
-    //                .srp((long) 435827)
-    //                .build()));
-    //        doNothing().when(dokterRepository).deleteById(anyLong());
+       @Test
+    void testGetDokterById() {
+        User user = User.builder()
+                .id(1L)
+                .username("lala")
+                .password("1235435")
+                .build();
+
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
+
+        when(dokterRepository.findById(anyLong()))
+            .thenReturn(Optional.of(Dokter.builder()
+                .id(1L)
+                .user(user)
+                .namadokter("lulu")
+                .spesialis("bedah jantung")
+                .srp((long) 435827)
+                .build()));
+
+        ResponseEntity<Object> responseEntity = dokterService.getDokterById(1L);
+        ApiResponse response = (ApiResponse) responseEntity.getBody();
+        Dokter dokter = (Dokter) Objects.requireNonNull(response).getData();
+
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertEquals("Success!", response.getMessage());
+        assertEquals(1L, dokter.getId());
+        assertEquals("lulu",dokter.getNamadokter());
+        assertEquals("bedah jantung",dokter.getSpesialis());
+        assertEquals((long) 435827,dokter.getSrp());
+
+    }
+
+       @Test
+       void testDeleteDokter() {
+            User user = User.builder()
+                .id(1L)
+                .username("lala")
+                .password("1235435")
+                .build();
+
+            when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
+
+           when(dokterRepository.findById(anyLong()))
+               .thenReturn(Optional.of(Dokter.builder()
+                   .id(1L)
+                   .user(user)
+                   .namadokter("lala")
+                   .spesialis("bedah jantung")
+                   .srp((long) 435827)
+                   .build()));
+           doNothing().when(dokterRepository).deleteById(anyLong());
    
-    //        ApiResponse response = (ApiResponse) dokterService.deleteDokter(1L).getBody();
-    //        assertEquals("Success!", response.getMessage());
-    //        verify(dokterRepository, times(1)).deleteById(anyLong());
-    //    }
+           ResponseEntity<Object> responseEntity = dokterService.deleteDokter(1L);
+           ApiResponse response = (ApiResponse) responseEntity.getBody();
+           assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+           assertEquals("Success!", response.getMessage());
+           verify(dokterRepository, times(1)).deleteById(anyLong());
+       }
    
-    // @Test
-    //     void testUpdateCategory() {
-    //         Category category = Category.builder()
-    //             .id(1L)
-    //             .category("Masakan Jawa")
-    //             .build();
+    @Test
+        void testUpdateDokter() {
+            User user = User.builder()
+                .id(1L)
+                .username("lala")
+                .password("1235435")
+                .build();
 
-    //         when(categoryRepository.findOne(anyLong())).thenReturn(Optional.of(category));
-    //         when(categoryRepository.save(any())).thenReturn(category);
-    //         ResponseEntity<Object> responseEntity = categoryService.updateCategory(CategoryRequest.builder().category("Masakan Jawa").build(), 1L);
-    //         ApiResponse response = (ApiResponse) responseEntity.getBody();
-    //         Category data = (Category) Objects.requireNonNull(response).getData();
+            when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
 
-    //         assertEquals(1L, data.getId());
-    //         assertEquals("Masakan Jawa", data.getCategory());
-    //     }
+            Dokter dokter = Dokter.builder()
+                .id(1L)
+                .user(user)
+                .namadokter("lala")
+                .spesialis("bedah jantung")
+                .srp((long) 435827)
+                .build();
 
-    
+            when(dokterRepository.findById(anyLong())).thenReturn(Optional.of(dokter));
+            when(dokterRepository.save(any())).thenReturn(dokter);
+            ResponseEntity<Object> responseEntity = dokterService.updateDokter(
+                                                DokterRequest.builder()
+                                                .userId(user.getId())
+                                                .namadokter("lala")
+                                                .spesialis("bedah jantung")
+                                                .srp((long) 435827)
+                                                .build(), 1L);
+            ApiResponse response = (ApiResponse) responseEntity.getBody();
+            Dokter data = (Dokter) Objects.requireNonNull(response).getData();
+            assertEquals("Success!", response.getMessage());
+            assertEquals(1L, data.getId());
+            assertEquals("lala", data.getNamadokter());
+            assertEquals("bedah jantung", data.getSpesialis());
+            assertEquals(435827, data.getSrp());
+
+        }
+
+            
 }

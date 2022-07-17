@@ -56,18 +56,10 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
-    // @JsonIgnore
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
-    // private List<Dokter> dokter;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "dokter_id", referencedColumnName = "id")
     @JsonIgnore
     private Dokter dokter;
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
-    private List<Pasien> pasien;
 
     @JsonIgnore
     @Builder.Default

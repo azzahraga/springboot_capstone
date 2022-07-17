@@ -47,13 +47,13 @@ public class JadwalService {
 
     public ResponseEntity<Object> save(JadwalRequest request){
         try{
-        // log.info("Get Dokter: {}");
+        log.info("Get Dokter: {}", request.getDokterId());
         Dokter dkt = dokterRepository.findById(request.getDokterId())
             .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
 
-        // log.info("Get Pasien: {}");
+        log.info("Get Pasien: {}",request.getPasienId());
         Pasien pasien = pasienRepository.findById(request.getPasienId())
-            .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
+            .orElseThrow(()-> new Exception("Pasien Id "+ request.getPasienId() + "Not Found"));
 
         log.info("Save new jadwal: {}",request);
         
@@ -77,11 +77,6 @@ public class JadwalService {
 
     }
     
-
-    public ResponseEntity<Object> getJadwal(Long jadwalId) {
-        return ResponseEntity.ok().body(jadwalRepository.findById(jadwalId));
-    }
-
     public ResponseEntity<Object> deleteJadwal(Long jadwalId) {
         log.info("Find jadwal by jadwal id for delete: {}", jadwalId);
         try {
