@@ -32,7 +32,6 @@ public class AuthenticationController {
 
   
     @PostMapping("/register")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> registerUser(@RequestBody UserRequest request) {
         try {
             User user = authenticationService.register(request);
